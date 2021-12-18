@@ -15,61 +15,85 @@ import com.huawei.agconnect.cloud.database.CloudDBZoneObject;
  *
  * @since 2021-12-18
  */
-//@PrimaryKeys({"novel_id"})
-//@Indexes({"id:novel_id"})
+//@PrimaryKeys({"id"})
+//@Indexes({"id:id"})
 public final class Novel extends CloudDBZoneObject {
-    private String novel_id;
+    private String id;
 
-    private String novel_name;
+    private String name;
 
-    private String novel_chapter_quantity;
-
-    private String novel_description;
-
-    private String novel_image;
-
-//    public Novel() {
-//        super(this);
-//    }
-
-    public void setNovel_id(String novel_id) {
-        this.novel_id = novel_id;
+    public String getAuthor() {
+        return author;
     }
 
-    public String getNovel_id() {
-        return novel_id;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public void setNovel_name(String novel_name) {
-        this.novel_name = novel_name;
+    private String author;
+
+    private String chapter_quantity;
+
+    private String description;
+
+    private String image;
+
+    public Novel(String id, String name, String author, String chapter_quantity, String description, String image) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+        this.chapter_quantity = chapter_quantity;
+        this.description = description;
+        this.image = image;
+    }
+    public Novel( String name, String author, String chapter_quantity, String description, String image) {
+        this.name = name;
+        this.author = author;
+        this.chapter_quantity = chapter_quantity;
+        this.description = description;
+        this.image = image;
+    }
+    public Novel(){
+
+    }
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getNovel_name() {
-        return novel_name;
+    public String getId() {
+        return id;
     }
 
-    public void setNovel_chapter_quantity(String novel_chapter_quantity) {
-        this.novel_chapter_quantity = novel_chapter_quantity;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNovel_chapter_quantity() {
-        return novel_chapter_quantity;
+    public String getName() {
+        return name;
     }
 
-    public void setNovel_description(String novel_description) {
-        this.novel_description = novel_description;
+    public void setChapter_quantity(String chapter_quantity) {
+        this.chapter_quantity = chapter_quantity;
     }
 
-    public String getNovel_description() {
-        return novel_description;
+    public String getChapter_quantity() {
+        return chapter_quantity;
     }
 
-    public void setNovel_image(String novel_image) {
-        this.novel_image = novel_image;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getNovel_image() {
-        return novel_image;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
     }
 
 }
