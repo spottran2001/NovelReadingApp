@@ -32,13 +32,13 @@ public final class Novel extends CloudDBZoneObject {
 
     private String author;
 
-    private String chapter_quantity;
+    private int chapter_quantity;
 
     private String description;
 
     private String image;
 
-    public Novel(String id, String name, String author, String chapter_quantity, String description, String image) {
+    public Novel(String id, String name, String author, int chapter_quantity, String description, String image) {
         this.id = id;
         this.name = name;
         this.author = author;
@@ -46,7 +46,7 @@ public final class Novel extends CloudDBZoneObject {
         this.description = description;
         this.image = image;
     }
-    public Novel( String name, String author, String chapter_quantity, String description, String image) {
+    public Novel( String name, String author, int chapter_quantity, String description, String image) {
         this.name = name;
         this.author = author;
         this.chapter_quantity = chapter_quantity;
@@ -72,11 +72,11 @@ public final class Novel extends CloudDBZoneObject {
         return name;
     }
 
-    public void setChapter_quantity(String chapter_quantity) {
+    public void setChapter_quantity(int chapter_quantity) {
         this.chapter_quantity = chapter_quantity;
     }
 
-    public String getChapter_quantity() {
+    public int getChapter_quantity() {
         return chapter_quantity;
     }
 

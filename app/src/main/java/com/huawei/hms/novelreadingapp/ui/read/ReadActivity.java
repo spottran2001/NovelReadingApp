@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ public class ReadActivity extends AppCompatActivity {
     TextView title, content;
     Button previous,previous2, next,next2;
     Spinner spinner,spinner2;
+    ImageButton back;
     ArrayList<Chapter> mChapters;
     private String currentChapter;
     @Override
@@ -36,7 +38,13 @@ public class ReadActivity extends AppCompatActivity {
         matching();
         Intent intent = getIntent();
         String novelId = intent.getStringExtra("novelId");
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
 
+            }
+        });
         String id = intent.getStringExtra("id");
         currentChapter= id;
         getNovel(novelId,currentChapter);
@@ -212,6 +220,7 @@ public class ReadActivity extends AppCompatActivity {
         });
     }
     private void matching(){
+        back= findViewById(R.id.read_ib_back);
         title = findViewById(R.id.read_tv_title);
         content = findViewById(R.id.read_tv_content);
         previous = findViewById(R.id.read_btn_previous);
