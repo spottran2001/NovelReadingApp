@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/activity_auth.xml" value="0.22604166666666667" />
+        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/activity_auth2.xml" value="0.22604166666666667" />
         <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.22604166666666667" />
+        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/fragment_home.xml" value="0.22604166666666667" />
+        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/fragment_notifications.xml" value="0.22604166666666667" />
       </map>
     </option>
   </component>
