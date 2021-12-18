@@ -48,7 +48,7 @@ android {
 }
 
 dependencies {
-
+    implementation 'com.huawei.agconnect:agconnect-database:1.2.1.301'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
@@ -66,5 +66,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.huawei.hms:hwid:5.0.5.301'
+
+    implementation 'com.huawei.hms:image-render-fallback:1.0.3.302'
+    implementation 'com.huawei.hms:image-render:1.0.3.303'
+    implementation 'com.huawei.hms:ads-identifier:3.4.34.301'
 }
 apply plugin: 'com.huawei.agconnect'
