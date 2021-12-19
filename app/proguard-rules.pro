@@ -24,7 +24,7 @@
 -keepattributes Exceptions
 -keepattributes InnerClasses
 -keepattributes Signature
--keepattributes SourceFileLineNumberTable,
+-keepattributes SourceFileLineNumberTable
 -keep class com.hianalytics.android.**{*;}
 -keep class com.huawei.updatesdk.**{*;}
 -keep class com.huawei.hms.**{*;}

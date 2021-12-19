@@ -21,7 +21,14 @@
         <entry key="..\:/NovelReadingApp/app/src/main/res/layout/item_novel.xml" value="0.5" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/layout/item_product.xml" value="0.5" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2015625" />
+        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/activity_detail.xml" value="0.12" />
+        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/activity_login.xml" value="0.18" />
         <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/activity_main.xml" value="0.21739130434782608" />
+        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/activity_read.xml" value="0.22" />
+        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/fragment_wishlist.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/item_chapter.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/item_novel.xml" value="0.3145833333333333" />
       </map>
     </option>
   </component>
