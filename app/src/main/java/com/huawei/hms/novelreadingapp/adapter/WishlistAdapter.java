@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -22,7 +21,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,15 +32,12 @@ import com.google.firebase.storage.StorageReference;
 import com.huawei.hms.novelreadingapp.R;
 import com.huawei.hms.novelreadingapp.model.Chapter;
 import com.huawei.hms.novelreadingapp.model.Novel;
-import com.huawei.hms.novelreadingapp.ui.detail.DetailActivity;
-
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHolder>{
 
@@ -53,12 +48,10 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     private TextView totalProducts;
     private List<Chapter>mChapters;
 
-    public WishlistAdapter(Context context, List<Novel> mWishlist, List<HashMap<String,String>> wishlistOptions) {
+    public WishlistAdapter(Context context, List<Novel> mWishlist) {
         this.context = context;
         this.mWishlist = mWishlist;
         this.wishlistOptions = wishlistOptions;
-        this.totalProducts = totalProducts;
-
     }
 
 
@@ -145,20 +138,22 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                     chapters.add("Chapter "+ String.valueOf(chapter.getChapter()));
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                        android.R.layout.simple_spinner_dropdown_item,chapters);
-
-
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                holder.chapterSpinner.setAdapter(adapter);
+//                lưu chương thì không có chọn
+//                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+//                        android.R.layout.simple_spinner_dropdown_item,chapters);
+//
+//
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                holder.chapterSpinner.setAdapter(adapter);
 
                 //get chapter
-                for(int i = 0 ; i < chapters.size(); i ++){
-                    String temp = wishlistOptions.get(holder.getAdapterPosition()).get("product_size");
-                    if(chapters.get(i).equals(temp)){
-                        holder.chapterSpinner.setSelection(i);
-                    }
-                }
+                // truyền novel vào rồi getChapter_read
+//                for(int i = 0 ; i < chapters.size(); i ++){
+//                    String temp = wishlistOptions.get(holder.getAdapterPosition()).get("product_size");
+//                    if(chapters.get(i).equals(temp)){
+//                        holder.chapterSpinner.setSelection(i);
+//                    }
+//                }
                 holder.chapterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -213,22 +208,25 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         }
     }
 
-    private void saveEdit(String productId, String size ){
-        //FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //DatabaseReference myRef = database.getReference("wishlist/"+ FirebaseAuth.getInstance().getCurrentUser().getUid() + "/"+ productId);
-        //myRef.child("product_size").setValue(size);
-        //lưu khi đổi wishlist
-    }
+//   ???!
+//    private void saveEdit(String productId, String size ){
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("wishlist/"+ FirebaseAuth.getInstance().getCurrentUser().getUid() + "/"+ productId);
+//        myRef.child("product_size").setValue(size);
+//        lưu khi đổi wishlist
+//    }
 
-    private void addProductCart(String idUser,String idProduct,int amount, String color,String size){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("cart");
-        String idColor = color.substring(1);
-        myRef.child(idUser).child("product").child(idProduct+idColor).child("productId").setValue(idProduct);
-        myRef.child(idUser).child("product").child(idProduct+idColor).child("amount").setValue(amount);
-        myRef.child(idUser).child("product").child(idProduct+idColor).child("color").setValue(color);
-        myRef.child(idUser).child("product").child(idProduct+idColor).child("size").setValue(size);
-    }
+
+//      VÔ DỤNG
+//    private void addProductCart(String idUser,String idProduct,int amount, String color,String size){
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("cart");
+//        String idColor = color.substring(1);
+//        myRef.child(idUser).child("product").child(idProduct+idColor).child("productId").setValue(idProduct);
+//        myRef.child(idUser).child("product").child(idProduct+idColor).child("amount").setValue(amount);
+//        myRef.child(idUser).child("product").child(idProduct+idColor).child("color").setValue(color);
+//        myRef.child(idUser).child("product").child(idProduct+idColor).child("size").setValue(size);
+//    }
 
 
     private void loadImage(ImageView image, String imageName, ViewHolder holder){
