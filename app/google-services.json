@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "78434415279",
+    "firebase_url": "https://huawei-d8269-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "huawei-d8269",
+    "storage_bucket": "huawei-d8269.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78434415279:android:6fb20480368fe02416da5a",
+        "android_client_info": {
+          "package_name": "com.huawei.hms.novelreadingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78434415279-r7d7j6a4p4ekn8lkunpd5gc5t7got3tk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD36BHXB25f8Y6e5AbO3K87-M8DLaL3SSQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78434415279-r7d7j6a4p4ekn8lkunpd5gc5t7got3tk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
