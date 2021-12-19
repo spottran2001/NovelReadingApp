@@ -75,10 +75,10 @@ public class HomeFragment extends Fragment  implements NovelListAdapter.OnNovelL
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mNovels.clear();
                 for (DataSnapshot dtShot : snapshot.getChildren()) {
-                    Novel product = dtShot.getValue(Novel.class);
-                    assert product != null;
-                    product.setId(dtShot.getKey());
-                    mNovels.add(product);
+                    Novel novel = dtShot.getValue(Novel.class);
+                    assert novel != null;
+                    novel.setId(dtShot.getKey());
+                    mNovels.add(novel);
                 }
                 adapter = new NovelListAdapter(getContext(), mNovels, HomeFragment.this);
                 recyclerView.setAdapter(adapter);

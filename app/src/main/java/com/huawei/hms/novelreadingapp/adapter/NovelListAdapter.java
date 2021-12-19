@@ -30,12 +30,13 @@ public class NovelListAdapter extends RecyclerView.Adapter<NovelListAdapter.View
     private Context context;
     private static List<Novel> mNovelList;
     private NovelListAdapter.OnNovelListener mOnNovelListener;
+    private String novelId;
 
 
-    public NovelListAdapter(Context context, List<Novel> mNovelList, NovelListAdapter.OnNovelListener OnNovelListener){
+    public NovelListAdapter(Context context, List<Novel> mNovelList, NovelListAdapter.OnNovelListener onNovelListener){
         this.context = context;
         this.mNovelList = mNovelList;
-        this.mOnNovelListener = OnNovelListener;
+        this.mOnNovelListener = onNovelListener;
     }
 
     @NonNull
@@ -69,13 +70,14 @@ public class NovelListAdapter extends RecyclerView.Adapter<NovelListAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView cover;
         TextView title, author;
-        OnNovelListener onNovelListener;
+        NovelListAdapter.OnNovelListener onNovelListener;
         public ViewHolder(@NonNull View itemView, OnNovelListener mOnNovelListener) {
             super(itemView);
             cover = itemView.findViewById(R.id.novel_iv_novel);
             title = itemView.findViewById(R.id.novel_tv_title);
             author  = itemView.findViewById(R.id.novel_tv_author);
             this.onNovelListener = mOnNovelListener;
+            itemView.setOnClickListener(this);
         }
         @Override
         public void onClick(View v) {

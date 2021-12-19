@@ -1,8 +1,5 @@
 package com.huawei.hms.novelreadingapp.ui.read;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +9,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,13 +31,17 @@ public class ReadActivity extends AppCompatActivity {
     ImageButton back;
     ArrayList<Chapter> mChapters;
     private String currentChapter;
+    private int size;
+    private String chapterId, novelId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read);
         matching();
         Intent intent = getIntent();
-        String novelId = intent.getStringExtra("novelId");
+        novelId = intent.getStringExtra("novelId");
+        chapterId = intent.getStringExtra("chapterId");
+        size = intent.getIntExtra( "size",0);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,9 +49,9 @@ public class ReadActivity extends AppCompatActivity {
 
             }
         });
-        String id = intent.getStringExtra("id");
-        currentChapter= id;
-        getNovel(novelId,currentChapter);
+
+
+        getNovel(novelId,chapterId);
     }
     private void getNovel(String novelId, String chapterId) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -91,56 +95,27 @@ public class ReadActivity extends AppCompatActivity {
                 previous.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        for(int i = 0 ; i< mChapters.size() ; i ++){
-                            if(mChapters.get(i).getId().equals(currentChapter)){
-                                if(i-1 >= 0){
-                                    currentChapter =  mChapters.get(i-1).getId();
-                                    break;
-                                }
-                            }
-                        }
+                        previousChapter(chapterId, size);
 
                     }
                 });
                 previous2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        for(int i = 0 ; i< mChapters.size() ; i ++){
-                            if(mChapters.get(i).getId().equals(currentChapter)){
-                                if(i-1 >= 0){
-                                    currentChapter =  mChapters.get(i-1).getId();
-                                    break;
-                                }
-                            }
-                        }
-
+                        previousChapter(chapterId, size);
                     }
                 });
                 next.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        for(int i = 0 ; i< mChapters.size() ; i ++){
-                            if(mChapters.get(i).getId().equals(currentChapter)){
-                                if(i+1 < mChapters.size()){
-                                    currentChapter =  mChapters.get(i+1).getId();
-                                    break;
-                                }
-                            }
-                        }
+                        nextChapter(chapterId, size);
 
                     }
                 });
                 next2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        for(int i = 0 ; i< mChapters.size() ; i ++){
-                            if(mChapters.get(i).getId().equals(currentChapter)){
-                                if(i+1 < mChapters.size()){
-                                    currentChapter =  mChapters.get(i+1).getId();
-                                    break;
-                                }
-                            }
-                        }
+                        nextChapter(chapterId, size);
 
                     }
                 });
@@ -158,7 +133,7 @@ public class ReadActivity extends AppCompatActivity {
                             Chapter chapter = dtShot.getValue(Chapter.class);
                             assert chapter != null;
                             chapter.setId(dtShot.getKey());
-                            if(chapter.getChapter() == (Integer.parseInt(text.substring(7)))){
+                            if(chapter.getChapter() == text.substring(7)){
                                 currentChapter = chapter.getId();
                                 break;
                             }
@@ -178,7 +153,7 @@ public class ReadActivity extends AppCompatActivity {
                             Chapter chapter = dtShot.getValue(Chapter.class);
                             assert chapter != null;
                             chapter.setId(dtShot.getKey());
-                            if(chapter.getChapter() == (Integer.parseInt(text.substring(7)))){
+                            if(chapter.getChapter() == text.substring(7)){
                                 currentChapter = chapter.getId();
                                 break;
                             }
@@ -208,8 +183,12 @@ public class ReadActivity extends AppCompatActivity {
                 Chapter chapter = snapshot.getValue(Chapter.class);
                 assert chapter != null;
                 chapter.setId(snapshot.getKey());
-
-                content.setText(chapter.getContent());
+                String[] text = chapter.getContent().split( "  ");
+                String contents = "";
+                for (int i = 0; i < text.length; i ++){
+                    contents += text[i] + "\n\n";
+                }
+                content.setText(contents);
                 currentChapter = chapter.getId();
             }
 
@@ -219,6 +198,29 @@ public class ReadActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void nextChapter(String chapter_id, int size){
+        int chapter = Integer.valueOf(chapter_id.substring(1));
+        if (chapter < size){
+            chapterId = "C"+ (chapter + 1);
+            getChapter(novelId, chapterId);
+        }else{
+            if (chapter == size){
+                chapterId = "C"+ (chapter + 1);
+            }
+            content.setText("Chapter is incoming, please comeback in the other time");
+        }
+
+    }
+
+    private void previousChapter(String chapter_id, int size){
+        int chapter = Integer.valueOf(chapter_id.substring(1));
+        if (chapter - 1 > 0){
+            chapterId = "C" + (chapter - 1);
+            getChapter(novelId, chapterId);
+        }
+    }
+
     private void matching(){
         back= findViewById(R.id.read_ib_back);
         title = findViewById(R.id.read_tv_title);
