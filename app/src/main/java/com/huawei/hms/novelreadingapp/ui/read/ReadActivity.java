@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class ReadActivity extends AppCompatActivity {
     TextView title, content;
     Button previous,previous2, next,next2;
+    ImageButton dropdown1, dropdown2;
     Spinner spinner,spinner2;
     ImageButton back;
     ArrayList<Chapter> mChapters;
@@ -42,6 +43,7 @@ public class ReadActivity extends AppCompatActivity {
         novelId = intent.getStringExtra("novelId");
         chapterId = intent.getStringExtra("chapterId");
         size = intent.getIntExtra( "size",0);
+        String abc = novelId + chapterId + size;
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,6 +121,18 @@ public class ReadActivity extends AppCompatActivity {
 
                     }
                 });
+                dropdown1.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        spinner.performClick();
+                    }
+                } );
+                dropdown2.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        spinner2.performClick();
+                    }
+                } );
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
                         android.R.layout.simple_spinner_dropdown_item, chapters);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -128,15 +142,11 @@ public class ReadActivity extends AppCompatActivity {
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        String text = parent.getItemAtPosition(position).toString();
-                        for (DataSnapshot dtShot : snapshot.getChildren()) {
-                            Chapter chapter = dtShot.getValue(Chapter.class);
-                            assert chapter != null;
-                            chapter.setId(dtShot.getKey());
-                            if(chapter.getChapter() == text.substring(7)){
-                                currentChapter = chapter.getId();
-                                break;
-                            }
+                        int text = Integer.parseInt(parent.getItemAtPosition(position).toString().substring(8)) ;
+                        if (text <= size){
+                            chapterId = "C" + text;
+                            getChapter(novelId, chapterId);
+                            spinner2.setSelection(text - 1);
                         }
                     }
 
@@ -148,15 +158,11 @@ public class ReadActivity extends AppCompatActivity {
                 spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        String text = parent.getItemAtPosition(position).toString();
-                        for (DataSnapshot dtShot : snapshot.getChildren()) {
-                            Chapter chapter = dtShot.getValue(Chapter.class);
-                            assert chapter != null;
-                            chapter.setId(dtShot.getKey());
-                            if(chapter.getChapter() == text.substring(7)){
-                                currentChapter = chapter.getId();
-                                break;
-                            }
+                        int text = Integer.parseInt( parent.getItemAtPosition(position).toString().substring(8) ) ;
+                        if (text <= size){
+                            chapterId = "C" + text;
+                            getChapter(novelId, chapterId);
+                            spinner.setSelection(text - 1);
                         }
                     }
 
@@ -231,6 +237,8 @@ public class ReadActivity extends AppCompatActivity {
         next2 = findViewById(R.id.read_btn_next_2);
         spinner = findViewById(R.id.read_spinner_chapter);
         spinner2 = findViewById(R.id.read_spinner_chapter_2);
+        dropdown1 = findViewById(R.id.read_ib_drop);
+        dropdown2 = findViewById(R.id.read_ib_drop_2);
     }
 
 }
