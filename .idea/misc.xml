@@ -7,7 +7,9 @@
         <entry key="..\:/NovelReadingApp/app/src/main/res/drawable/border_radius_gray_light.xml" value="0.21770833333333334" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/drawable/ic_drop_down.xml" value="0.21770833333333334" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/drawable/ic_heart.xml" value="0.22135416666666666" />
+        <entry key="..\:/NovelReadingApp/app/src/main/res/drawable/ic_heart_activated.xml" value="0.2625" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/drawable/ic_previous.xml" value="0.3828125" />
+        <entry key="..\:/NovelReadingApp/app/src/main/res/drawable/ic_remove_product_cart.xml" value="0.3671875" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/layout/activity_detail.xml" value="0.22" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/layout/activity_main.xml" value="0.36102564102564105" />
@@ -16,29 +18,13 @@
         <entry key="..\:/NovelReadingApp/app/src/main/res/layout/fragment_home.xml" value="0.2713541666666667" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/layout/fragment_notifications.xml" value="0.36666666666666664" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/layout/fragment_profile.xml" value="0.19791666666666666" />
-        <entry key="..\:/NovelReadingApp/app/src/main/res/layout/fragment_wishlist.xml" value="0.34375" />
+        <entry key="..\:/NovelReadingApp/app/src/main/res/layout/fragment_wishlist.xml" value="0.25" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/layout/item_chapter.xml" value="0.33" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/layout/item_novel.xml" value="0.5" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/layout/item_product.xml" value="0.5" />
+        <entry key="..\:/NovelReadingApp/app/src/main/res/layout/item_wishlist.xml" value="0.5" />
         <entry key="..\:/NovelReadingApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2015625" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/drawable/border_corner_linear_layout.xml" value="0.2546875" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/drawable/border_radius_gray_light.xml" value="0.2546875" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.2546875" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/drawable/ic_drop_down.xml" value="0.2546875" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/drawable/ic_heart.xml" value="0.2546875" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2546875" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2546875" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.2546875" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/drawable/ic_previous.xml" value="0.2546875" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/activity_detail.xml" value="0.33" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/activity_main.xml" value="0.21739130434782608" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/activity_read.xml" value="0.22" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/fragment_profile.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/fragment_wishlist.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/item_chapter.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/src/main/res/layout/item_novel.xml" value="0.3145833333333333" />
       </map>
     </option>
   </component>

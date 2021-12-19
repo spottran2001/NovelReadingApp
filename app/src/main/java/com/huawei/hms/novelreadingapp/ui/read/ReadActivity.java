@@ -133,13 +133,12 @@ public class ReadActivity extends AppCompatActivity {
                             Chapter chapter = dtShot.getValue(Chapter.class);
                             assert chapter != null;
                             chapter.setId(dtShot.getKey());
-                            if(chapter.getChapter() == text.substring(7)){
+                            if(chapter.getChapter().equals(text.substring(7))){
                                 currentChapter = chapter.getId();
                                 break;
                             }
                         }
                     }
-
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
                         // sometimes you need nothing here
@@ -153,7 +152,7 @@ public class ReadActivity extends AppCompatActivity {
                             Chapter chapter = dtShot.getValue(Chapter.class);
                             assert chapter != null;
                             chapter.setId(dtShot.getKey());
-                            if(chapter.getChapter() == text.substring(7)){
+                            if(chapter.getChapter().equals(text.substring(7))){
                                 currentChapter = chapter.getId();
                                 break;
                             }

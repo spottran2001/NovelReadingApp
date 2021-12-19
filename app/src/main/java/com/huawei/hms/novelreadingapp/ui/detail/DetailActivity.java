@@ -54,6 +54,8 @@ public class DetailActivity extends AppCompatActivity implements ChapterAdapter.
         Intent intent = getIntent();
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+
+        recyclerView.setLayoutManager(verticalLayoutManager);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +63,6 @@ public class DetailActivity extends AppCompatActivity implements ChapterAdapter.
 
             }
         });
-        recyclerView.setLayoutManager(verticalLayoutManager);
-
         String id = intent.getStringExtra("id");
         novelId = id;
         getNovel(id);
