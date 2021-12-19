@@ -29,6 +29,7 @@ import com.huawei.hms.novelreadingapp.R;
 import com.huawei.hms.novelreadingapp.adapter.ChapterAdapter;
 import com.huawei.hms.novelreadingapp.model.Chapter;
 import com.huawei.hms.novelreadingapp.model.Novel;
+import com.huawei.hms.novelreadingapp.ui.read.ReadActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -94,7 +95,7 @@ public class DetailActivity extends AppCompatActivity implements ChapterAdapter.
     private void getChapters(String id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Chapter").child(id);
-         mChapters = new ArrayList<>();
+        mChapters = new ArrayList<>();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -109,11 +110,12 @@ public class DetailActivity extends AppCompatActivity implements ChapterAdapter.
                 readLatest.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        Intent intent = new Intent(getApplicationContext(), ReadActivity.class);
-//
-//                        intent.putExtra("novelId",id);
-//                        intent.putExtra("id", mChapters.get(mChapters.size()-1).getId());
-//                        startActivity(intent);
+                        Intent intent = new Intent(getApplicationContext(), ReadActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("novelId",id);
+                        intent.putExtra("chapterId", mChapters.get(mChapters.size()-1).getId());
+                        intent.putExtra("size", mChapters.size());
+                        startActivity(intent);
 
                     }
                 });
