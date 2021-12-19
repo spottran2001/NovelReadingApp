@@ -12,7 +12,7 @@ android {
     }
     defaultConfig {
         applicationId "com.huawei.hms.novelreadingapp"
-        minSdk 30
+        minSdk 26
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -71,6 +71,7 @@ dependencies {
     implementation 'com.huawei.hms:image-render-fallback:1.0.3.302'
     implementation 'com.huawei.hms:image-render:1.0.3.303'
     implementation 'com.huawei.hms:ads-identifier:3.4.34.301'
+    implementation 'com.huawei.hms:ads-lite:13.4.30.307'
 
 
     implementation 'com.google.firebase:firebase-database:20.0.2'

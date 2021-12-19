@@ -2,31 +2,44 @@ package com.huawei.hms.novelreadingapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.huawei.hms.novelreadingapp.R;
 import com.huawei.hms.novelreadingapp.model.Chapter;
-import com.huawei.hms.novelreadingapp.model.Novel;
 import com.huawei.hms.novelreadingapp.ui.read.ReadActivity;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHolder>{
 
     private Context context;
     private static List<Chapter> mChapters;
+    private ChapterAdapter.OnChapterListener mOnChapterListener;
+    private String novelId;
+    private int size;
 
-    public ChapterAdapter(Context context, List<Chapter> mChapters){
+    public ChapterAdapter(Context context, List<Chapter> mChapters, ChapterAdapter.OnChapterListener onChapterListener, String novel_id){
         this.context = context;
         this.mChapters = mChapters;
+        this.mOnChapterListener = onChapterListener;
+        this.novelId = novel_id;
     }
 
 
@@ -41,21 +54,21 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ChapterAdapter.ViewHolder holder, int position) {
+        size = mChapters.size();
         Chapter chapter = mChapters.get(holder.getAdapterPosition());
-        String title = chapter.getChapter() + " " + chapter.getTitle();
+        String title = chapter.getChapter() + ". " + chapter.getTitle();
         holder.title.setText(title);
-        holder.title.setOnClickListener(new View.OnClickListener() {
+        holder.title.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ReadActivity.class);
-
-                intent.putExtra("novelId", chapter.getNovelId());
-                intent.putExtra("id", chapter.getId());
-
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("chapterId", chapter.getId());
+                intent.putExtra( "novelId", novelId);
+                intent.putExtra( "size", size);
                 context.startActivity(intent);
-
             }
-        });
+        } );
     }
 
     @Override
@@ -64,15 +77,46 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         Button title;
         ImageButton save;
+        ChapterAdapter.OnChapterListener onChapterListener;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.chapter_btn_chapter);
             save = itemView.findViewById(R.id.chapter_btn_heart);
+            this.onChapterListener = mOnChapterListener;
+            itemView.setOnClickListener(this);
 
         }
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            String id = mChapters.get(position).getId();
+            onChapterListener.onChapterClick(position,v,id);
+        }
+    }
+    public interface OnChapterListener{
+        void onChapterClick(int position, View view, String id);
+    }
+    private void loadImage(ImageView image, String imageName){
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(imageName);
+        try {
+            File file = File.createTempFile("tmp",".jpg");
+            storageReference.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                    BitmapDrawable ob = new BitmapDrawable(bitmap);
+
+                    image.setBackground(ob);
+                    image.setVisibility(View.VISIBLE);
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

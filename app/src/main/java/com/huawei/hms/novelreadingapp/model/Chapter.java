@@ -1,10 +1,14 @@
 package com.huawei.hms.novelreadingapp.model;
 
 public class Chapter {
-    public Chapter(int chapter, String content, String title) {
+    public Chapter(String chapter, String content, String title, String id) {
         this.chapter = chapter;
         this.content = content;
         this.title = title;
+        this.id = id;
+    }
+    public Chapter(){
+
     }
 
     public String getNovelId() {
@@ -17,14 +21,14 @@ public class Chapter {
 
     private String novelId;
 
-    private int chapter;
+    private String chapter;
     private String content;
 
-    public int getChapter() {
+    public String getChapter() {
         return chapter;
     }
 
-    public void setChapter(int chapter) {
+    public void setChapter(String chapter) {
         this.chapter = chapter;
     }
 
