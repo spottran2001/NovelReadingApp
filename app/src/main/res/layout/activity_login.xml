@@ -3,37 +3,60 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:textDirection="ltr"
     tools:context=".ui.auth.LoginActivity">
 
 
     <ImageView
-        android:id="@+id/logo"
+        android:id="@+id/iv_logo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".30"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_appName"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:gravity="center_horizontal"
+        android:text="NOVEL READING APP"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/HuaweiIdAuthButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:text="LOGIN"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/HuaweiIdAuthButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_appName" />
 
     <com.huawei.hms.support.hwid.ui.HuaweiIdAuthButton
         android:id="@+id/HuaweiIdAuthButton"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="599dp">
 
     </com.huawei.hms.support.hwid.ui.HuaweiIdAuthButton>
 

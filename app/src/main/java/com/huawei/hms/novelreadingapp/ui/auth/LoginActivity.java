@@ -22,6 +22,7 @@ import com.huawei.hms.support.account.request.AccountAuthParams;
 import com.huawei.hms.support.account.request.AccountAuthParamsHelper;
 import com.huawei.hms.support.account.result.AuthAccount;
 import com.huawei.hms.support.account.service.AccountAuthService;
+import com.huawei.hms.support.hwid.ui.HuaweiIdAuthButton;
 
 public class LoginActivity extends AppCompatActivity {
     private AccountAuthService mAuthService;
@@ -33,6 +34,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        HuaweiIdAuthButton btn = findViewById(R.id.HuaweiIdAuthButton);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SignInUsingHwId();
+            }
+        });
     }
     private void SignInUsingHwId() {
         // If your app needs to obtain the user's email address, call setEmail() , similarly you  need to acess ID token or authorisation code setIDToken() and setAuthorisationCode()
