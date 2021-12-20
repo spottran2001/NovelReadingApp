@@ -38,20 +38,32 @@ public final class Novel extends CloudDBZoneObject {
 
     private String image;
 
-    public Novel(String id, String name, String author, int chapter_quantity, String description, String image) {
+    public String getChapter_read() {
+        return chapter_read;
+    }
+
+    public void setChapter_read(String chapter_read) {
+        this.chapter_read = chapter_read;
+    }
+
+    private String chapter_read;
+
+    public Novel(String id, String name, String author, int chapter_quantity, String description, String image, String chapter_read) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.chapter_quantity = chapter_quantity;
         this.description = description;
         this.image = image;
+        this.chapter_read = chapter_read;
     }
-    public Novel( String name, String author, int chapter_quantity, String description, String image) {
+    public Novel( String name, String author, int chapter_quantity, String description, String image, String chapter_read) {
         this.name = name;
         this.author = author;
         this.chapter_quantity = chapter_quantity;
         this.description = description;
         this.image = image;
+        this.chapter_read = chapter_read;
     }
     public Novel(){
 

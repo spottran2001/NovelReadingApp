@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -35,7 +34,6 @@ import com.huawei.hms.novelreadingapp.ui.read.ReadActivity;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,6 +44,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
     private ChapterAdapter.OnChapterListener mOnChapterListener;
     private String novelId;
     private int size;
+    private String idUser;
 
     public ChapterAdapter(Context context, List<Chapter> mChapters, ChapterAdapter.OnChapterListener onChapterListener, String novel_id){
         this.context = context;
@@ -83,6 +82,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
         } );
         // lay wishlist
         //getUserWishlist(fUser.getUid(), product, holder.heart);
+        getUserWishlist(idUser, chapter, holder.heart, novelId);
 
 
         holder.heart.setOnClickListener(new View.OnClickListener()
@@ -93,6 +93,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
 
                 boolean condition = holder.heart.getDrawable().getConstantState() == Objects.requireNonNull(ContextCompat.getDrawable(context, R.drawable.ic_heart)).getConstantState();
 
+                idUser = "AC1";
                 if(getDeviceName().contentEquals("Samsung"))
                 {  Integer resource = (Integer) holder.heart.getTag();
                     boolean samsungCont = resource == R.drawable.ic_heart;
@@ -100,13 +101,13 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
                     {
                         holder.heart.setImageResource(R.drawable.ic_heart_activated);
                         //String idUser = fUser.getUid();
-                        //addProductWishlist(idUser,productOptions.get(holder.getAdapterPosition()));
+                        addProductWishlist(idUser, chapter, novelId);
                         holder.heart.setTag(R.drawable.ic_heart_activated);
 
                     }else{
                         holder.heart.setImageResource(R.drawable.ic_heart);
                         //String idUser = fUser.getUid();
-                        //delProductWishlist(idUser,product.getProduct_id());
+                        delProductWishlist(idUser, chapter, novelId);
                         holder.heart.setTag(R.drawable.ic_heart);
 
                     }
@@ -115,13 +116,13 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
                     {
                         holder.heart.setImageResource(R.drawable.ic_heart_activated);
                         //String idUser = fUser.getUid();
-                        //addProductWishlist(idUser,productOptions.get(holder.getAdapterPosition()));
+                        addProductWishlist(idUser, chapter, novelId);
                         holder.heart.setTag(R.drawable.ic_heart_activated);
 
                     }else{
                         holder.heart.setImageResource(R.drawable.ic_heart);
                         //String idUser = fUser.getUid();
-                        //delProductWishlist(idUser,product.getProduct_id());
+                        delProductWishlist(idUser, chapter, novelId);
                         holder.heart.setTag(R.drawable.ic_heart);
 
                     }
@@ -131,9 +132,9 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
             }});
 
     }
-    private void getUserWishlist(String user_id, Chapter chapter , ImageButton heart){
+    private void getUserWishlist(String user_id, Chapter chapter , ImageButton heart, String novelId){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("wishlist/"+user_id);
+        DatabaseReference myRef = database.getReference("Wishlist/"+user_id);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -143,12 +144,12 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
                 }
                 for (int i =0 ; i < listWishlist.size();i++) {
                     // so sanh id cua san pham (cua minh la chapter) voi id trong list nay
-                    if (chapter.getId().equals(listWishlist.get(i))) {
+                    String id = novelId + chapter.getId();
+                    if (id.equals(listWishlist.get(i))) {
                         heart.setImageResource(R.drawable.ic_heart_activated);
                         heart.setTag(R.drawable.ic_heart_activated);
                     } else {
                         heart.setTag(R.drawable.ic_heart);
-
                     }
                 }
             }
@@ -179,19 +180,18 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
             return Character.toUpperCase(first) + s.substring(1);
         }
     }
-    private void addProductWishlist(String idUser, HashMap<String, String> product){
+    private void addProductWishlist(String idUser, Chapter chapter, String novelId){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("wishlist/"+idUser);
-        myRef.child(Objects.requireNonNull(product.get("productId"))).child("product_id").setValue(product.get("productId"));
-        myRef.child(Objects.requireNonNull(product.get("productId"))).child("product_size").setValue(product.get("size"));
-        myRef.child(Objects.requireNonNull(product.get("productId"))).child("product_color").setValue(product.get("color"));
+        DatabaseReference myRef = database.getReference("Wishlist/"+ idUser);
+        myRef.child(novelId + chapter.getId()).child("novel_id").setValue(novelId);
+        myRef.child(novelId + chapter.getId()).child("chapter_id").setValue(chapter.getId());
 
     }
 
-    private void delProductWishlist(String idUser,String idProduct){
+    private void delProductWishlist(String idUser, Chapter chapter, String novelId){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("wishlist/"+idUser);
-        myRef.child(idProduct).removeValue();
+        DatabaseReference myRef = database.getReference("Wishlist/"+idUser);
+        myRef.child(novelId + chapter.getId()).removeValue();
 
     }
     @Override

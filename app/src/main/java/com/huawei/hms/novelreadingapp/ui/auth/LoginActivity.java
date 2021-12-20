@@ -1,21 +1,17 @@
 package com.huawei.hms.novelreadingapp.ui.auth;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.huawei.hms.novelreadingapp.MainActivity;
-import com.huawei.hms.novelreadingapp.R;
-import com.huawei.hms.support.account.request.AccountAuthParams;
-import com.huawei.hms.support.account.service.AccountAuthService;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.huawei.hmf.tasks.OnFailureListener;
 import com.huawei.hmf.tasks.OnSuccessListener;
 import com.huawei.hmf.tasks.Task;
 import com.huawei.hms.common.ApiException;
+import com.huawei.hms.novelreadingapp.R;
 import com.huawei.hms.novelreadingapp.ui.home.HomeFragment;
 import com.huawei.hms.support.account.AccountAuthManager;
 import com.huawei.hms.support.account.request.AccountAuthParams;
@@ -29,6 +25,18 @@ public class LoginActivity extends AppCompatActivity {
     private AccountAuthParams mAuthParam;
     private static final int REQUEST_CODE_SIGN_IN = 1000;
     private static final String TAG = "Account";
+    private static String userId;
+
+    public static String getUserId() {
+        return userId;
+    }
+
+    public void  setUserId(String userId) {
+        LoginActivity.userId = userId;
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +84,12 @@ public class LoginActivity extends AppCompatActivity {
                 // The silent sign-in is successful. Process the returned account object AuthAccount to obtain the HUAWEI ID information.
                 //dealWithResultOfSignIn(authAccount);
 
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, HomeFragment.class);
                 intent.putExtra("avt",authAccount.getAvatarUriString());
                 intent.putExtra("email",authAccount.getEmail());
                 intent.putExtra("name",authAccount.getDisplayName());
+                intent.putExtra( "userId",authAccount.getUid());
+                setUserId(authAccount.getUid());
                 startActivity(intent);
             }
         });

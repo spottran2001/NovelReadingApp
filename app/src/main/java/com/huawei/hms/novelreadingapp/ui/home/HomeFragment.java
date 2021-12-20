@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +37,7 @@ public class HomeFragment extends Fragment  implements NovelListAdapter.OnNovelL
     private ArrayList<Novel> mNovels;
     private NovelListAdapter adapter;
     private InterstitialAd interstitialAd;
+    private String userId;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -52,6 +52,10 @@ public class HomeFragment extends Fragment  implements NovelListAdapter.OnNovelL
         recyclerView.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
+
+        Intent intent = getActivity().getIntent();
+        userId = intent.getStringExtra("userId");
+
 
         getProduct();
 
@@ -102,6 +106,7 @@ public class HomeFragment extends Fragment  implements NovelListAdapter.OnNovelL
     public void onNovelClick(int position, View view, String id) {
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra("id", id);
+        intent.putExtra("userId", userId);
         startActivity(intent);
     }
 
