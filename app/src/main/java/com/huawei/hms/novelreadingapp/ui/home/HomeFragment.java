@@ -53,8 +53,9 @@ public class HomeFragment extends Fragment  implements NovelListAdapter.OnNovelL
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        Intent intent = getActivity().getIntent();
-        userId = intent.getStringExtra("userId");
+        assert getArguments() != null;
+        userId= getArguments().getString("userId");
+
 
 
         getProduct();

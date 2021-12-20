@@ -46,11 +46,12 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
     private int size;
     private String idUser;
 
-    public ChapterAdapter(Context context, List<Chapter> mChapters, ChapterAdapter.OnChapterListener onChapterListener, String novel_id){
+    public ChapterAdapter(Context context, List<Chapter> mChapters, ChapterAdapter.OnChapterListener onChapterListener, String novel_id, String idUser){
         this.context = context;
         this.mChapters = mChapters;
         this.mOnChapterListener = onChapterListener;
         this.novelId = novel_id;
+        this.idUser = idUser;
     }
 
 
@@ -93,7 +94,6 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
 
                 boolean condition = holder.heart.getDrawable().getConstantState() == Objects.requireNonNull(ContextCompat.getDrawable(context, R.drawable.ic_heart)).getConstantState();
 
-                idUser = "AC1";
                 if(getDeviceName().contentEquals("Samsung"))
                 {  Integer resource = (Integer) holder.heart.getTag();
                     boolean samsungCont = resource == R.drawable.ic_heart;

@@ -11,8 +11,8 @@ import com.huawei.hmf.tasks.OnFailureListener;
 import com.huawei.hmf.tasks.OnSuccessListener;
 import com.huawei.hmf.tasks.Task;
 import com.huawei.hms.common.ApiException;
+import com.huawei.hms.novelreadingapp.MainActivity;
 import com.huawei.hms.novelreadingapp.R;
-import com.huawei.hms.novelreadingapp.ui.home.HomeFragment;
 import com.huawei.hms.support.account.AccountAuthManager;
 import com.huawei.hms.support.account.request.AccountAuthParams;
 import com.huawei.hms.support.account.request.AccountAuthParamsHelper;
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                 // The silent sign-in is successful. Process the returned account object AuthAccount to obtain the HUAWEI ID information.
                 //dealWithResultOfSignIn(authAccount);
 
-                Intent intent = new Intent(LoginActivity.this, HomeFragment.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("avt",authAccount.getAvatarUriString());
                 intent.putExtra("email",authAccount.getEmail());
                 intent.putExtra("name",authAccount.getDisplayName());

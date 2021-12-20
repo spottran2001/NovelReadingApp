@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -30,6 +31,7 @@ import com.google.firebase.storage.StorageReference;
 import com.huawei.hms.novelreadingapp.R;
 import com.huawei.hms.novelreadingapp.model.Chapter;
 import com.huawei.hms.novelreadingapp.model.Novel;
+import com.huawei.hms.novelreadingapp.ui.read.ReadActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -71,7 +73,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
 
 
-        loadImage(holder.image,novel.getImage(),holder);
+        loadImage(holder.image,novel.getImage());
 
         totalCount= mWishlist.size();
         items.setText(totalCount > 1 ? totalCount + " ITEMS": totalCount + " ITEM");
@@ -80,13 +82,6 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         holder.name.setText(novel.getName());
 
         holder.totalChapter.setText(novel.getChapter_quantity());
-
-        holder.read.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //chuyển sang đọc
-            }
-        });
 
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,12 +105,12 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             }
         });
 
-        getChapters(novel.getId());
+        getChapters(novel.getId(), novel, holder.tv_chapter, holder.read );
 
 
 
     }
-    private void getChapters(String id, Novel novel, TextView tv_chapter) {
+    private void getChapters(String id, Novel novel, TextView tv_chapter, Button read) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Chapter").child(id);
         mChapters = new ArrayList<>();
@@ -126,10 +121,24 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 for (DataSnapshot dtShot : snapshot.getChildren()) {
                     Chapter chapter = dtShot.getValue(Chapter.class);
                     assert chapter != null;
+                    chapter.setId(dtShot.getKey());
+                    chapter.setNovelId(id);
+                    mChapters.add(chapter);
                     if (chapter.getId().equals(novel.getChapter_read())){
                         tv_chapter.setText(chapter.getId());
                     }
                 }
+                read.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context.getApplicationContext(), ReadActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("novelId",id);
+                        intent.putExtra("chapterId", String.valueOf(tv_chapter.getText()));
+                        intent.putExtra("size", mChapters.size());
+                        context.startActivity(intent);
+                    }
+                } );
 
 //                lưu chương thì không có chọn
 //                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
@@ -196,7 +205,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 //    }
 
 
-    private void loadImage(ImageView image, String imageName, ViewHolder holder){
+    private void loadImage(ImageView image, String imageName){
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(imageName);
         try {
             File file = File.createTempFile("tmp",".png");

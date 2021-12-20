@@ -1,19 +1,13 @@
 package com.huawei.hms.novelreadingapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import android.content.Intent;
-import android.util.Log;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.huawei.hms.novelreadingapp.databinding.ActivityMainBinding;
@@ -35,11 +29,13 @@ public class MainActivity extends AppCompatActivity {
         String avt = intent.getStringExtra("avt");
         String email = intent.getStringExtra("email");
         String name = intent.getStringExtra("name");
+        String id = intent.getStringExtra("userId");
 
         Bundle bundle = new Bundle();
         bundle.putString("avt",avt);
         bundle.putString("email",email);
         bundle.putString("name",name);
+        bundle.putString( "userId",id );
         ProfileFragment profile = new ProfileFragment();
         profile.setArguments(bundle);
 

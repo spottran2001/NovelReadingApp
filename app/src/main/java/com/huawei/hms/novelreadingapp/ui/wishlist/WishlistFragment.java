@@ -43,6 +43,11 @@ public class WishlistFragment extends Fragment {
         binding = FragmentWishlistBinding.inflate( inflater, container, false );
         View root = binding.getRoot();
         matching();
+
+        assert getArguments() != null;
+        
+        String userID = getArguments().getString("userId");
+
         items = binding.wishlistTvItems;
 
         recyclerView.setHasFixedSize(true);
