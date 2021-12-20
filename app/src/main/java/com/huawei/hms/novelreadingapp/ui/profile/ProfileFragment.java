@@ -10,16 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.huawei.hms.novelreadingapp.R;
 import com.huawei.hms.novelreadingapp.databinding.FragmentProfileBinding;
 import com.huawei.hms.novelreadingapp.ui.auth.LoginActivity;
-
-import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
@@ -40,6 +35,8 @@ public class ProfileFragment extends Fragment {
         String avt = getArguments().getString("avt");
         String email = getArguments().getString("email");
         String name = getArguments().getString("name");
+        String userID = getArguments().getString("userId");
+
 
         tv_detail = binding.tvProfileUserName;
         tv_detail.setText("Hi, "+name+"\n"+email);

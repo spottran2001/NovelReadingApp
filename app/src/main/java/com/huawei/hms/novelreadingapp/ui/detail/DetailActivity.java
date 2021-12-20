@@ -46,6 +46,7 @@ public class DetailActivity extends AppCompatActivity implements ChapterAdapter.
     private ChapterAdapter adapter;
     private String novelId;
     private ArrayList<Novel> mNovels;
+    private String idUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class DetailActivity extends AppCompatActivity implements ChapterAdapter.
             }
         });
         String id = intent.getStringExtra("id");
+        idUser =intent.getStringExtra("userId");
         novelId = id;
         getNovel(id);
         image(cover,id);
@@ -120,7 +122,7 @@ public class DetailActivity extends AppCompatActivity implements ChapterAdapter.
                     }
                 });
 
-                adapter = new ChapterAdapter(getApplicationContext(), mChapters, DetailActivity.this, novelId);
+                adapter = new ChapterAdapter(getApplicationContext(), mChapters, DetailActivity.this, novelId, idUser);
                 recyclerView.setAdapter(adapter);
 
             }

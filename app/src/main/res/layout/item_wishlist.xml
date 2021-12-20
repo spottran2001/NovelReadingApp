@@ -147,8 +147,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <Spinner
-                    android:id="@+id/wishlist_spinner_dropDownSize"
+                <TextView
+                    android:id="@+id/wishlist_tv_dropDownSize"
 
                     android:layout_width="100dp"
                     android:layout_height="25dp"
@@ -159,19 +159,6 @@
                     android:background="@drawable/border_radius_gray_light"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,DuplicateClickableBoundsCheck,DuplicateClickableBoundsCheck" />
 
-                <ImageButton
-                    android:id="@+id/wishlist_btn_dropDown"
-                    android:layout_width="15dp"
-                    android:layout_height="10dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="76dp"
-
-                    android:layout_marginTop="7dp"
-                    android:background="?android:selectableItemBackground"
-                    android:backgroundTint="#777777"
-                    android:src="@drawable/ic_drop_down"
-                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,DuplicateClickableBoundsCheck,DuplicateClickableBoundsCheck" />
             </RelativeLayout>
         </LinearLayout>
 

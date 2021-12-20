@@ -4,17 +4,16 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,26 +31,25 @@ import com.google.firebase.storage.StorageReference;
 import com.huawei.hms.novelreadingapp.R;
 import com.huawei.hms.novelreadingapp.model.Chapter;
 import com.huawei.hms.novelreadingapp.model.Novel;
+import com.huawei.hms.novelreadingapp.ui.read.ReadActivity;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHolder>{
 
     private Context context;
     private  List<Novel> mWishlist;
-    private List<HashMap<String,String>> wishlistOptions;
     private int totalCount = 0;
-    private TextView totalProducts;
+    private TextView items;
     private List<Chapter>mChapters;
 
-    public WishlistAdapter(Context context, List<Novel> mWishlist) {
+    public WishlistAdapter(Context context, List<Novel> mWishlist, TextView items) {
         this.context = context;
         this.mWishlist = mWishlist;
-        this.wishlistOptions = wishlistOptions;
+        this.items = items;
     }
 
 
@@ -75,22 +73,15 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
 
 
-        loadImage(holder.image,novel.getImage(),holder);
+        loadImage(holder.image,novel.getImage());
 
-        totalCount= wishlistOptions.size();
-        totalProducts.setText(totalCount > 1 ? totalCount + " ITEMS": totalCount + " ITEM");
+        totalCount= mWishlist.size();
+        items.setText(totalCount > 1 ? totalCount + " ITEMS": totalCount + " ITEM");
 
 
         holder.name.setText(novel.getName());
 
         holder.totalChapter.setText(novel.getChapter_quantity());
-
-        holder.read.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //chuyển sang đọc
-            }
-        });
 
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,16 +105,14 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             }
         });
 
-        getChapters(novel.getId(),holder);
+        getChapters(novel.getId(), novel, holder.tv_chapter, holder.read );
 
 
 
     }
-    private void getChapters(String id, ViewHolder holder) {
+    private void getChapters(String id, Novel novel, TextView tv_chapter, Button read) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Chapter").child(id);
-        ArrayList<String> chapters = new ArrayList<>();
-
         mChapters = new ArrayList<>();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -135,8 +124,21 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                     chapter.setId(dtShot.getKey());
                     chapter.setNovelId(id);
                     mChapters.add(chapter);
-                    chapters.add("Chapter "+ String.valueOf(chapter.getChapter()));
+                    if (chapter.getId().equals(novel.getChapter_read())){
+                        tv_chapter.setText(chapter.getId());
+                    }
                 }
+                read.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context.getApplicationContext(), ReadActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("novelId",id);
+                        intent.putExtra("chapterId", String.valueOf(tv_chapter.getText()));
+                        intent.putExtra("size", mChapters.size());
+                        context.startActivity(intent);
+                    }
+                } );
 
 //                lưu chương thì không có chọn
 //                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
@@ -154,34 +156,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 //                        holder.chapterSpinner.setSelection(i);
 //                    }
 //                }
-                holder.chapterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        String text = parent.getItemAtPosition(position).toString();
-                        for (DataSnapshot dtShot : snapshot.getChildren()) {
-                            Chapter chapter = dtShot.getValue(Chapter.class);
-                            assert chapter != null;
-                            chapter.setId(dtShot.getKey());
-                            if(chapter.getChapter().equals(text.substring(7))){
-                                // lưu vào wishlist
-                                break;
-                            }
-                        }
-                    }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                        // sometimes you need nothing here
-                    }
-                });
 
-                holder.dropDown.setOnClickListener(new  View.OnClickListener(){
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onClick(View v) {
-                        holder.chapterSpinner.performClick();
-                    }
-                });
 
             }
 
@@ -204,7 +180,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         }
         if(mWishlist.isEmpty()){
             mWishlist.clear();
-            totalProducts.setText("0 ITEM");
+            items.setText("0 ITEM");
         }
     }
 
@@ -229,7 +205,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 //    }
 
 
-    private void loadImage(ImageView image, String imageName, ViewHolder holder){
+    private void loadImage(ImageView image, String imageName){
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(imageName);
         try {
             File file = File.createTempFile("tmp",".png");
@@ -258,8 +234,9 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         ImageView image;
         TextView name,author,totalChapter;
         Button read;
-        ImageButton remove,dropDown;
-        Spinner chapterSpinner;
+        ImageButton remove;
+        TextView tv_chapter;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -267,10 +244,11 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             name = itemView.findViewById(R.id.wishlist_tv_title);
             author = itemView.findViewById(R.id.wishlist_tv_author);
             totalChapter = itemView.findViewById(R.id.wishlist_tv_totalChapter);
-            chapterSpinner = (Spinner) itemView.findViewById(R.id.wishlist_spinner_dropDownSize);
+
             read = itemView.findViewById(R.id.wishList_btn_read);
             remove = itemView.findViewById(R.id.wishlist_ibtn_remove);
-            dropDown = itemView.findViewById(R.id.wishlist_btn_dropDown);
+            tv_chapter = itemView.findViewById(R.id.wishlist_tv_dropDownSize);
+
         }
     }
 }

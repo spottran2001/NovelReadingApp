@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,6 +34,7 @@ public class WishlistFragment extends Fragment {
     private List<Novel> mWishlist;
     private WishlistAdapter adapter;
     private RecyclerView recyclerView;
+    private TextView items;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         wishlistViewModel =
@@ -42,6 +44,11 @@ public class WishlistFragment extends Fragment {
         View root = binding.getRoot();
         matching();
 
+        assert getArguments() != null;
+        
+        String userID = getArguments().getString("userId");
+
+        items = binding.wishlistTvItems;
 
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -96,7 +103,7 @@ public class WishlistFragment extends Fragment {
                         mWishlist.add(novel);
                     }
                 }
-                adapter = new WishlistAdapter(getContext(),mWishlist);
+                adapter = new WishlistAdapter(getContext(),mWishlist, items);
                 recyclerView.setAdapter(adapter);
 
             }
