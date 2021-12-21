@@ -23,7 +23,7 @@ android {
 
     signingConfigs {
         config {
-            storeFile file('C:/Users/Henry/AndroidStudioProjects/NovelReadingApp/app/Novel.jks')
+            storeFile file('C:\\Android\\NovelReadingApp\\app\\Novel.jks')
             storePassword '123456'
             keyPassword '123456'
             keyAlias 'key0'
