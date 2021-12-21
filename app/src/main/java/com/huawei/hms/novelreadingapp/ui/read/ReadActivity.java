@@ -32,7 +32,7 @@ public class ReadActivity extends AppCompatActivity {
     ImageButton back;
     ArrayList<Chapter> mChapters;
     private String currentChapter;
-    private int size;
+    private int size, text;
     private String chapterId, novelId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,43 @@ public class ReadActivity extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
 
+            }
+        });
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int text = Integer.parseInt(parent.getItemAtPosition(position).toString().substring(8)) ;
+                chapterId = "C" + text;
+                if (Integer.parseInt(chapterId.substring(1)) == text){
+                    if (text <= size){
+                        getChapter(novelId, chapterId);
+                        spinner.setSelection(Integer.parseInt(chapterId.substring(1))-1);
+                        spinner2.setSelection(Integer.parseInt(chapterId.substring(1))-1);
+                    }
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // sometimes you need nothing here
+            }
+        });
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int text = Integer.parseInt( parent.getItemAtPosition(position).toString().substring(8) ) ;
+                chapterId = "C" + text;
+                if (Integer.parseInt(chapterId.substring(1)) == text){
+                    if (text <= size){
+                        getChapter(novelId, chapterId);
+                        spinner.setSelection(Integer.parseInt(chapterId.substring(1))-1);
+                        spinner2.setSelection(Integer.parseInt(chapterId.substring(1))-1);
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // sometimes you need nothing here
             }
         });
 
@@ -138,39 +175,6 @@ public class ReadActivity extends AppCompatActivity {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter);
                 spinner2.setAdapter(adapter);
-
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        int text = Integer.parseInt(parent.getItemAtPosition(position).toString().substring(8)) ;
-                        if (text <= size){
-                            chapterId = "C" + text;
-                            getChapter(novelId, chapterId);
-                            spinner2.setSelection(text - 1);
-                        }
-                    }
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                        // sometimes you need nothing here
-                    }
-                });
-                spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        int text = Integer.parseInt( parent.getItemAtPosition(position).toString().substring(8) ) ;
-                        if (text <= size){
-                            chapterId = "C" + text;
-                            getChapter(novelId, chapterId);
-                            spinner.setSelection(text - 1);
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                        // sometimes you need nothing here
-                    }
-                });
-
             }
 
             @Override
@@ -193,8 +197,10 @@ public class ReadActivity extends AppCompatActivity {
                 for (int i = 0; i < text.length; i ++){
                     contents += text[i] + "\n\n";
                 }
+
                 content.setText(contents);
-                currentChapter = chapter.getId();
+                spinner.setSelection(Integer.parseInt(chapterId.substring(1))-1);
+                spinner2.setSelection(Integer.parseInt(chapterId.substring(1))-1);
             }
 
             @Override

@@ -81,7 +81,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
         holder.name.setText(novel.getName());
 
-        holder.totalChapter.setText(novel.getChapter_quantity());
+        holder.totalChapter.setText(String.valueOf(novel.getChapter_quantity()));
 
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +134,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                         Intent intent = new Intent(context.getApplicationContext(), ReadActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("novelId",id);
-                        intent.putExtra("chapterId", String.valueOf(tv_chapter.getText()));
+                        String abc = String.valueOf(tv_chapter.getText());
+                        intent.putExtra("chapterId", abc);
                         intent.putExtra("size", mChapters.size());
                         context.startActivity(intent);
                     }

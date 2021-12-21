@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,7 @@ public class HomeFragment extends Fragment  implements NovelListAdapter.OnNovelL
     private ArrayList<Novel> mNovels;
     private NovelListAdapter adapter;
     private InterstitialAd interstitialAd;
-    private String userId;
+    private String userId =null;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,8 +54,18 @@ public class HomeFragment extends Fragment  implements NovelListAdapter.OnNovelL
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        assert getArguments() != null;
-        userId= getArguments().getString("userId");
+//        assert        () != null;
+//        userId= getArguments().getString("userId");
+        Intent intent = getActivity().getIntent();
+        userId = intent.getStringExtra("email");
+        TextView test = binding.tvText;
+        if (userId != null){
+            test.setText(userId);
+        }else{
+            test.setText("NO thing to do");
+        }
+
+
 
 
 
@@ -107,7 +118,7 @@ public class HomeFragment extends Fragment  implements NovelListAdapter.OnNovelL
     public void onNovelClick(int position, View view, String id) {
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra("id", id);
-        intent.putExtra("userId", userId);
+        intent.putExtra("email", userId);
         startActivity(intent);
     }
 
