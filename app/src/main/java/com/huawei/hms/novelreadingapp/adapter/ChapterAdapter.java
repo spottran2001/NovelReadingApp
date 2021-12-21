@@ -82,7 +82,10 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
             }
         } );
         // lay wishlist
+
         //getUserWishlist(fUser.getUid(), product, holder.heart);
+        idUser = idUser.split("@")[0];
+        String tmp = idUser;
         getUserWishlist(idUser, chapter, holder.heart, novelId);
 
 
