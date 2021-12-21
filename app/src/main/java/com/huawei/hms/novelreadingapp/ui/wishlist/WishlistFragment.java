@@ -1,5 +1,6 @@
 package com.huawei.hms.novelreadingapp.ui.wishlist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,6 @@ import com.huawei.hms.novelreadingapp.adapter.WishlistAdapter;
 import com.huawei.hms.novelreadingapp.databinding.FragmentWishlistBinding;
 import com.huawei.hms.novelreadingapp.model.Novel;
 import com.huawei.hms.novelreadingapp.model.Wishlist;
-import com.huawei.hms.novelreadingapp.ui.auth.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,17 +44,19 @@ public class WishlistFragment extends Fragment {
         View root = binding.getRoot();
         matching();
 
-        assert getArguments() != null;
-        
-        String userID = getArguments().getString("userId");
+//        assert getArguments() != null;
+//
+//        String userID = getArguments().getString("userId");
 
         items = binding.wishlistTvItems;
 
+        recyclerView = binding.wishlistRvProducts;
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(verticalLayoutManager);
         // cần id người dùng
-        String id = LoginActivity.getUserId();
+        Intent intent = getActivity().getIntent();
+        String id = intent.getStringExtra("email");
         getWishlist(id);
 
         return root;
@@ -71,7 +73,6 @@ public class WishlistFragment extends Fragment {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mWishlist.clear();
                 for (DataSnapshot dtShot : snapshot.getChildren()) {
                     Wishlist wishlist = dtShot.getValue(Wishlist.class);
                     assert wishlist != null;

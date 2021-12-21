@@ -66,7 +66,7 @@ public class DetailActivity extends AppCompatActivity implements ChapterAdapter.
             }
         });
         String id = intent.getStringExtra("id");
-        idUser =intent.getStringExtra("userId");
+        idUser =intent.getStringExtra("email");
         novelId = id;
         getNovel(id);
         image(cover,id);
