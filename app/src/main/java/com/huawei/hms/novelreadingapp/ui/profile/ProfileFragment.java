@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.huawei.hms.novelreadingapp.databinding.FragmentProfileBinding;
 import com.huawei.hms.novelreadingapp.ui.auth.LoginActivity;
 
@@ -20,6 +21,7 @@ public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
     private FragmentProfileBinding binding;
+    ImageView profile_photo;
     TextView tv_detail;
     @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -31,18 +33,23 @@ public class ProfileFragment extends Fragment {
         View root = binding.getRoot();
 
 
-        assert getArguments() != null;
-        String avt = getArguments().getString("avt");
-        String email = getArguments().getString("email");
-        String name = getArguments().getString("name");
+        Intent intent = getActivity().getIntent();
+        String email = intent.getStringExtra("email");
+        String name = intent.getStringExtra("name");
+
+//        assert getArguments() != null;
+//        String avt = getArguments().getString("avt");
+//        String email = getArguments().getString("email");
+//        String name = getArguments().getString("name");
 //        String userID = getArguments().getString("userId");
 
 
         tv_detail = binding.tvProfileUserName;
         tv_detail.setText("Hi, "+name+"\n"+email);
-
-        new DownloadImageTask((ImageView) binding.profileIvAvatar)
-                .execute(avt);
+        profile_photo = binding.profileIvAvatar;
+        Glide.with(ProfileFragment.this)
+                .load(getActivity().getIntent().getStringExtra("avt"))
+                .into(profile_photo);
         LoginActivity login = new LoginActivity();
         binding.profileBtnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override

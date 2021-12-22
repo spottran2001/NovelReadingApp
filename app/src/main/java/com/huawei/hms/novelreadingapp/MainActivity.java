@@ -11,9 +11,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.huawei.hms.novelreadingapp.databinding.ActivityMainBinding;
-import com.huawei.hms.novelreadingapp.ui.home.HomeFragment;
-import com.huawei.hms.novelreadingapp.ui.profile.ProfileFragment;
-import com.huawei.hms.novelreadingapp.ui.wishlist.WishlistFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,22 +26,22 @@ public class MainActivity extends AppCompatActivity {
         String avt = intent.getStringExtra("avt");
         String email = intent.getStringExtra("email");
         String name = intent.getStringExtra("name");
-        String id = intent.getStringExtra("userId");
+//        String id = intent.getStringExtra("userId");
 
-        Bundle bundle = new Bundle();
-        bundle.putString("avt",avt);
-        bundle.putString("email",email);
-        bundle.putString("name",name);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("avt",avt);
+//        bundle.putString("email",email);
+//        bundle.putString("name",name);
 ////        bundle.putString( "userId",id );
-        ProfileFragment profile = new ProfileFragment();
-        profile.setArguments(bundle);
-
-        HomeFragment home = new HomeFragment();
-        home.setArguments(bundle);
-
-
-        WishlistFragment wishlist = new WishlistFragment();
-        wishlist.setArguments(bundle);
+//        ProfileFragment profile = new ProfileFragment();
+//        profile.setArguments(bundle);
+//
+//        HomeFragment home = new HomeFragment();
+//        home.setArguments(bundle);
+//
+//
+//        WishlistFragment wishlist = new WishlistFragment();
+//        wishlist.setArguments(bundle);
 
         BottomNavigationView navView = findViewById( R.id.nav_view );
         // Passing each menu ID as a set of Ids because each
