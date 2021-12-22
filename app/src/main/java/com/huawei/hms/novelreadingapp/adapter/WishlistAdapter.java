@@ -185,26 +185,6 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         }
     }
 
-//   ???!
-//    private void saveEdit(String productId, String size ){
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("wishlist/"+ FirebaseAuth.getInstance().getCurrentUser().getUid() + "/"+ productId);
-//        myRef.child("product_size").setValue(size);
-//        lưu khi đổi wishlist
-//    }
-
-
-//      VÔ DỤNG
-//    private void addProductCart(String idUser,String idProduct,int amount, String color,String size){
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("cart");
-//        String idColor = color.substring(1);
-//        myRef.child(idUser).child("product").child(idProduct+idColor).child("productId").setValue(idProduct);
-//        myRef.child(idUser).child("product").child(idProduct+idColor).child("amount").setValue(amount);
-//        myRef.child(idUser).child("product").child(idProduct+idColor).child("color").setValue(color);
-//        myRef.child(idUser).child("product").child(idProduct+idColor).child("size").setValue(size);
-//    }
-
 
     private void loadImage(ImageView image, String imageName){
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(imageName);

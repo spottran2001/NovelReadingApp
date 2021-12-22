@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:layout_marginTop="10dp"
+    android:paddingHorizontal="5dp"
+    android:layout_marginTop="20dp"
     android:layout_weight="1"
     android:background="?android:selectableItemBackground"
     app:cardElevation="0dp">
@@ -18,7 +19,9 @@
             android:id="@+id/img_cardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardCornerRadius="10dp">
+            android:background="@drawable/border_corner_linear_layout"
+            android:foreground="?android:selectableItemBackground"
+            >
 
 
             <LinearLayout

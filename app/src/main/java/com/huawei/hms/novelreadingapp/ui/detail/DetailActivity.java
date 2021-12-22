@@ -82,8 +82,8 @@ public class DetailActivity extends AppCompatActivity implements ChapterAdapter.
                 assert novel != null;
                 novel.setId(snapshot.getKey());
                 title.setText(novel.getName());
-                author.setText(novel.getAuthor());
-                totalChapters.setText(String.valueOf( novel.getChapter_quantity() ));
+                author.setText("Author " + novel.getAuthor());
+                totalChapters.setText(String.valueOf( novel.getChapter_quantity() + " Chapters" ));
                 getChapters(novel.getId());
 
             }

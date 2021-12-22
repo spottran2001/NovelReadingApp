@@ -2,6 +2,7 @@ package com.huawei.hms.novelreadingapp.ui.wishlist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +23,12 @@ import com.huawei.hms.novelreadingapp.adapter.WishlistAdapter;
 import com.huawei.hms.novelreadingapp.databinding.FragmentWishlistBinding;
 import com.huawei.hms.novelreadingapp.model.Novel;
 import com.huawei.hms.novelreadingapp.model.Wishlist;
+import com.huawei.hms.novelreadingapp.ui.auth.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class WishlistFragment extends Fragment {
 
@@ -54,11 +57,9 @@ public class WishlistFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(verticalLayoutManager);
-        // cần id người dùng
-        Intent intent = getActivity().getIntent();
-        String id = intent.getStringExtra("email");
-        id = id.split("@")[0];
-        getWishlist(id);
+
+
+        getWishlist(LoginActivity.getAccount().getOpenId());
 
         return root;
     }

@@ -11,6 +11,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.huawei.hms.novelreadingapp.databinding.ActivityMainBinding;
+import com.huawei.hms.novelreadingapp.ui.home.HomeFragment;
+import com.huawei.hms.novelreadingapp.ui.profile.ProfileFragment;
+import com.huawei.hms.novelreadingapp.ui.wishlist.WishlistFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,17 +25,17 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate( getLayoutInflater() );
         setContentView( binding.getRoot() );
-        Intent intent = getIntent();
-        String avt = intent.getStringExtra("avt");
-        String email = intent.getStringExtra("email");
-        String name = intent.getStringExtra("name");
-//        String id = intent.getStringExtra("userId");
-
+//        Intent intent = getIntent();
+//        String avt = intent.getStringExtra("avt");
+//        String email = intent.getStringExtra("email");
+//        String name = intent.getStringExtra("name");
+//        String id = intent.getStringExtra("id");
+//
 //        Bundle bundle = new Bundle();
 //        bundle.putString("avt",avt);
 //        bundle.putString("email",email);
 //        bundle.putString("name",name);
-////        bundle.putString( "userId",id );
+//        bundle.putString( "userId",id );
 //        ProfileFragment profile = new ProfileFragment();
 //        profile.setArguments(bundle);
 //

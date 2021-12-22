@@ -21,12 +21,29 @@ import com.huawei.hms.support.account.service.AccountAuthService;
 import com.huawei.hms.support.hwid.ui.HuaweiIdAuthButton;
 
 public class LoginActivity extends AppCompatActivity {
-    private AccountAuthService mAuthService;
+    public static AccountAuthService getmAuthService() {
+        return mAuthService;
+    }
+
+    public void setmAuthService(AccountAuthService mAuthService) {
+        this.mAuthService = mAuthService;
+    }
+
+    private static AccountAuthService mAuthService;
     private AccountAuthParams mAuthParam;
     private static final int REQUEST_CODE_SIGN_IN = 1000;
     private static final String TAG = "Account";
     private static String userId;
 
+    public static AuthAccount getAccount() {
+        return account;
+    }
+
+    public static void setAccount(AuthAccount account) {
+        LoginActivity.account = account;
+    }
+
+    public static AuthAccount account;
     public static String getUserId() {
         return userId;
     }
@@ -115,6 +132,7 @@ private void SignInUsingHwId() {
             .setEmail()
             .createParams();
     mAuthService = AccountAuthManager.getService(this, mAuthParam);
+    setmAuthService(mAuthService);
     Intent signInIntent = mAuthService.getSignInIntent();
     // startActivityForResult() method, we can get result from another activity
     startActivityForResult(signInIntent, REQUEST_CODE_SIGN_IN);
@@ -133,7 +151,7 @@ private void SignInUsingHwId() {
             if (authAccountTask.isSuccessful()) {
                 // The sign-in is successful, and the authAccount object that contains the HUAWEI ID information is obtained.
                 AuthAccount authAccount = authAccountTask.getResult();
-
+                setAccount(authAccount);
 
 // when the user login sucesfully , i will get all the details and i am passing all to the next activity via the intent .
 //                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -144,6 +162,7 @@ private void SignInUsingHwId() {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra( "email",authAccount.getEmail());
                 intent.putExtra("name", authAccount.getDisplayName());
+                intent.putExtra("id",authAccount.getOpenId());
                 intent.putExtra("avt", authAccount.getAvatarUriString());
                 startActivity(intent);
             } else {
@@ -153,8 +172,8 @@ private void SignInUsingHwId() {
         }
     }
 
-    public void signOut() {
-        Task<Void> signOutTask = mAuthService.signOut();
+    public static void signOut() {
+        Task<Void> signOutTask = getmAuthService().signOut();
         signOutTask.addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -167,8 +186,8 @@ private void SignInUsingHwId() {
             }
         });
     }
-    public void cancelAuthorization() {
-        Task<Void> task = mAuthService.cancelAuthorization();
+    public static void cancelAuthorization() {
+        Task<Void> task = getmAuthService().cancelAuthorization();
         task.addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

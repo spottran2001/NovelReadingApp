@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.huawei.hms.ads.AdListener;
 import com.huawei.hms.ads.AdParam;
+import com.huawei.hms.ads.HwAds;
 import com.huawei.hms.ads.InterstitialAd;
 import com.huawei.hms.novelreadingapp.adapter.NovelListAdapter;
 import com.huawei.hms.novelreadingapp.databinding.FragmentHomeBinding;
@@ -56,14 +57,7 @@ public class HomeFragment extends Fragment  implements NovelListAdapter.OnNovelL
 
 //        assert        () != null;
 //        userId= getArguments().getString("userId");
-        Intent intent = getActivity().getIntent();
-        userId = intent.getStringExtra("email");
-        TextView test = binding.tvText;
-        if (userId != null){
-            test.setText(userId);
-        }else{
-            test.setText("NO thing to do");
-        }
+
 
 
 

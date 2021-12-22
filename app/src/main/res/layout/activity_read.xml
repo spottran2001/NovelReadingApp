@@ -129,6 +129,9 @@
                 android:id="@+id/read_tv_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="15dp"
+                android:textSize="16sp"
+                android:textColor="#0f0f0f"
                 />
         </LinearLayout>
         <LinearLayout

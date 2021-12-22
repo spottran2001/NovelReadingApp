@@ -29,7 +29,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.huawei.hms.novelreadingapp.R;
 import com.huawei.hms.novelreadingapp.model.Chapter;
+import com.huawei.hms.novelreadingapp.ui.auth.LoginActivity;
 import com.huawei.hms.novelreadingapp.ui.read.ReadActivity;
+import com.huawei.hms.support.account.result.AuthAccount;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,7 +70,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
     public void onBindViewHolder(@NonNull ChapterAdapter.ViewHolder holder, int position) {
         size = mChapters.size();
         Chapter chapter = mChapters.get(holder.getAdapterPosition());
-        String title = chapter.getChapter() + ". " + chapter.getTitle();
+        String title = "Chapter " + chapter.getChapter() + ". " + chapter.getTitle();
         holder.title.setText(title);
         holder.title.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -84,9 +86,8 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
         // lay wishlist
 
         //getUserWishlist(fUser.getUid(), product, holder.heart);
-        idUser = idUser.split("@")[0];
-        String tmp = idUser;
-        getUserWishlist(idUser, chapter, holder.heart, novelId);
+
+        getUserWishlist(LoginActivity.getAccount().getOpenId(), chapter, holder.heart, novelId);
 
 
         holder.heart.setOnClickListener(new View.OnClickListener()

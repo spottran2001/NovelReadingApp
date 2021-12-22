@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.huawei.hms.novelreadingapp.databinding.FragmentProfileBinding;
 import com.huawei.hms.novelreadingapp.ui.auth.LoginActivity;
+import com.huawei.hms.support.account.result.AuthAccount;
 
 public class ProfileFragment extends Fragment {
 
@@ -33,19 +34,19 @@ public class ProfileFragment extends Fragment {
         View root = binding.getRoot();
 
 
-        Intent intent = getActivity().getIntent();
-        String email = intent.getStringExtra("email");
-        String name = intent.getStringExtra("name");
+//        Intent intent = getActivity().getIntent();
+//        String email = intent.getStringExtra("email");
+//        String name = intent.getStringExtra("name");
 
-//        assert getArguments() != null;
-//        String avt = getArguments().getString("avt");
-//        String email = getArguments().getString("email");
-//        String name = getArguments().getString("name");
-//        String userID = getArguments().getString("userId");
+        AuthAccount account = LoginActivity.getAccount();
+        String avt = account.getAvatarUriString();
+        String email = account.getEmail();
+        String name = account.getDisplayName();
+        String userID = account.getOpenId();
 
 
         tv_detail = binding.tvProfileUserName;
-        tv_detail.setText("Hi, "+name+"\n"+email);
+        tv_detail.setText("Hi, "+name);
         profile_photo = binding.profileIvAvatar;
         Glide.with(ProfileFragment.this)
                 .load(getActivity().getIntent().getStringExtra("avt"))
@@ -54,7 +55,7 @@ public class ProfileFragment extends Fragment {
         binding.profileBtnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login.signOut();
+                LoginActivity.signOut();
                 Intent intent = new Intent(requireContext(),LoginActivity.class);
                 requireContext().startActivity(intent);
                 requireActivity().finish();
@@ -63,7 +64,7 @@ public class ProfileFragment extends Fragment {
         binding.profileBtnCancelAuthorization.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login.cancelAuthorization();
+                LoginActivity.cancelAuthorization();
                 Intent intent = new Intent(requireContext(),LoginActivity.class);
                 requireContext().startActivity(intent);
                 requireActivity().finish();
