@@ -57,6 +57,7 @@ public class WishlistFragment extends Fragment {
         // cần id người dùng
         Intent intent = getActivity().getIntent();
         String id = intent.getStringExtra("email");
+        id = id.split("@")[0];
         getWishlist(id);
 
         return root;

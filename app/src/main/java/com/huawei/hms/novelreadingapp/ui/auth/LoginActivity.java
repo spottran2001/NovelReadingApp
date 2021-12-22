@@ -137,14 +137,14 @@ private void SignInUsingHwId() {
 
 // when the user login sucesfully , i will get all the details and i am passing all to the next activity via the intent .
 //                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                intent.putExtra("name", authAccount.getDisplayName());
 //                intent.putExtra("email", authAccount.getEmail());
-//                intent.putExtra("photo_uri", authAccount.getAvatarUriString());
 //                intent.putExtra("auth", authAccount.getAuthorizationCode());
 //
 //                startActivity(intent);
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra( "email",authAccount.getEmail());
+                intent.putExtra("name", authAccount.getDisplayName());
+                intent.putExtra("avt", authAccount.getAvatarUriString());
                 startActivity(intent);
             } else {
                 // The sign-in fails. Find the failure cause from the status code. For more information, please refer to the "Error Codes" section in the API Reference.

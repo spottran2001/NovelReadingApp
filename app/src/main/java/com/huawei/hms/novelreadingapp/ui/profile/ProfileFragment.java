@@ -35,7 +35,7 @@ public class ProfileFragment extends Fragment {
         String avt = getArguments().getString("avt");
         String email = getArguments().getString("email");
         String name = getArguments().getString("name");
-        String userID = getArguments().getString("userId");
+//        String userID = getArguments().getString("userId");
 
 
         tv_detail = binding.tvProfileUserName;
