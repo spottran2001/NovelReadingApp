@@ -82,8 +82,8 @@ public class DetailActivity extends AppCompatActivity implements ChapterAdapter.
                 assert novel != null;
                 novel.setId(snapshot.getKey());
                 title.setText(novel.getName());
-                author.setText("Author " + novel.getAuthor());
-                totalChapters.setText(String.valueOf( novel.getChapter_quantity() + " Chapters" ));
+                author.setText("Author: " + novel.getAuthor());
+                totalChapters.setText(String.valueOf( novel.getChapter_quantity() + "   Chapters" ));
                 getChapters(novel.getId());
 
             }
@@ -122,7 +122,7 @@ public class DetailActivity extends AppCompatActivity implements ChapterAdapter.
                     }
                 });
 
-                adapter = new ChapterAdapter(getApplicationContext(), mChapters, DetailActivity.this, novelId, idUser);
+                adapter = new ChapterAdapter(getApplicationContext(), mChapters, DetailActivity.this, novelId);
                 recyclerView.setAdapter(adapter);
 
             }

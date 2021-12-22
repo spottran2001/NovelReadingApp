@@ -31,6 +31,7 @@ import com.google.firebase.storage.StorageReference;
 import com.huawei.hms.novelreadingapp.R;
 import com.huawei.hms.novelreadingapp.model.Chapter;
 import com.huawei.hms.novelreadingapp.model.Novel;
+import com.huawei.hms.novelreadingapp.ui.auth.LoginActivity;
 import com.huawei.hms.novelreadingapp.ui.read.ReadActivity;
 
 import java.io.File;
@@ -81,36 +82,14 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
         holder.name.setText(novel.getName());
 
-        holder.totalChapter.setText(String.valueOf(novel.getChapter_quantity()));
-
-        holder.remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                new AlertDialog.Builder(context)
-                        .setTitle("Warning")
-                        .setMessage("Do you want to delete this?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                //delProductWishlist(idUser,product.getProduct_id(),holder.getAdapterPosition());
-
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-
-
-            }
-        });
-
-        getChapters(novel.getId(), novel, holder.tv_chapter, holder.read );
+        holder.author.setText(novel.getAuthor());
+        getChapters(novel.getId(), novel, holder.tv_chapter, holder.read,holder.remove,holder.getAdapterPosition() );
 
 
 
     }
-    private void getChapters(String id, Novel novel, TextView tv_chapter, Button read) {
+
+    private void getChapters(String id, Novel novel, TextView tv_chapter, Button read, ImageButton remove,int position) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Chapter").child(id);
         mChapters = new ArrayList<>();
@@ -118,6 +97,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mChapters.clear();
+                String currentChapter = "";
+
                 for (DataSnapshot dtShot : snapshot.getChildren()) {
                     Chapter chapter = dtShot.getValue(Chapter.class);
                     assert chapter != null;
@@ -125,39 +106,46 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                     chapter.setNovelId(id);
                     mChapters.add(chapter);
                     if (chapter.getId().equals(novel.getChapter_read())){
-                        tv_chapter.setText(chapter.getId());
+                        currentChapter= chapter.getId();
+                        tv_chapter.setText(chapter.getChapter());
                     }
                 }
-                read.setOnClickListener( new View.OnClickListener() {
+                String finalCurrentChapter = currentChapter;
+                read.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(context.getApplicationContext(), ReadActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("novelId",id);
-                        String abc = String.valueOf(tv_chapter.getText());
-                        intent.putExtra("chapterId", abc);
+                        intent.putExtra("chapterId", finalCurrentChapter);
                         intent.putExtra("size", mChapters.size());
                         context.startActivity(intent);
                     }
                 } );
 
-//                lưu chương thì không có chọn
-//                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-//                        android.R.layout.simple_spinner_dropdown_item,chapters);
-//
-//
-//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                holder.chapterSpinner.setAdapter(adapter);
 
-                //get chapter
-                // truyền novel vào rồi getChapter_read
-//                for(int i = 0 ; i < chapters.size(); i ++){
-//                    String temp = wishlistOptions.get(holder.getAdapterPosition()).get("product_size");
-//                    if(chapters.get(i).equals(temp)){
-//                        holder.chapterSpinner.setSelection(i);
-//                    }
-//                }
+                String finalCurrentChapter1 = currentChapter;
+                remove.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
+                        new AlertDialog.Builder(context)
+                                .setTitle("Warning")
+                                .setMessage("Do you want to delete this?")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        delProductWishlist(LoginActivity.getAccount().getOpenId(),novel.getId() + finalCurrentChapter1,position);
+
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, null)
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
+
+
+                    }
+                });
 
 
             }
@@ -172,7 +160,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
     private void delProductWishlist(String idUser, String idProduct, int position){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("wishlist/"+idUser);
+        DatabaseReference myRef = database.getReference("Wishlist/"+idUser);
         myRef.child(idProduct).removeValue();
         if(!mWishlist.isEmpty()&& mWishlist.size() > position) {
             mWishlist.remove(position);
@@ -224,7 +212,6 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             image =(ImageView) itemView.findViewById(R.id.wishlist_iv_cover);
             name = itemView.findViewById(R.id.wishlist_tv_title);
             author = itemView.findViewById(R.id.wishlist_tv_author);
-            totalChapter = itemView.findViewById(R.id.wishlist_tv_totalChapter);
 
             read = itemView.findViewById(R.id.wishList_btn_read);
             remove = itemView.findViewById(R.id.wishlist_ibtn_remove);

@@ -107,28 +107,11 @@
             android:textSize="14sp"
             tools:ignore="TextContrastCheck" />
 
-        <TextView
-            android:id="@+id/wishlist_tv_totalChapter"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-
-            android:layout_below="@+id/wishlist_tv_author"
-
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@+id/linearlayout_productCart_addToCart_sectionOne"
-            android:gravity="center_vertical"
-            android:text="199 Chapters"
-            android:textColor="#444444"
-            android:textSize="14sp" />
-
         <LinearLayout
             android:id="@+id/linearlayout_itemProductCart_sectionTwo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/wishlist_tv_totalChapter"
+            android:layout_below="@+id/wishlist_tv_author"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="0dp"
@@ -153,7 +136,7 @@
                     android:layout_width="100dp"
                     android:layout_height="25dp"
 
-
+                    android:gravity="center"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="0dp"
                     android:background="@drawable/border_radius_gray_light"
@@ -178,13 +161,12 @@
                 android:id="@+id/wishList_btn_read"
 
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="50dp"
                 android:layout_below="@+id/navigation_bar_item_viewList_color"
 
                 android:background="?android:selectableItemBackground"
-
                 android:backgroundTint="@android:color/black"
-                android:padding="0sp"
+                android:paddingHorizontal="10dp"
                 android:text="Continue Reading"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

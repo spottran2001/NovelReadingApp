@@ -46,14 +46,22 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
     private ChapterAdapter.OnChapterListener mOnChapterListener;
     private String novelId;
     private int size;
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
     private String idUser;
 
-    public ChapterAdapter(Context context, List<Chapter> mChapters, ChapterAdapter.OnChapterListener onChapterListener, String novel_id, String idUser){
+    public ChapterAdapter(Context context, List<Chapter> mChapters, ChapterAdapter.OnChapterListener onChapterListener, String novel_id){
         this.context = context;
         this.mChapters = mChapters;
         this.mOnChapterListener = onChapterListener;
         this.novelId = novel_id;
-        this.idUser = idUser;
     }
 
 
@@ -86,8 +94,8 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
         // lay wishlist
 
         //getUserWishlist(fUser.getUid(), product, holder.heart);
-
-        getUserWishlist(LoginActivity.getAccount().getOpenId(), chapter, holder.heart, novelId);
+        setIdUser(LoginActivity.getAccount().getOpenId());
+        getUserWishlist(idUser, chapter, holder.heart, novelId);
 
 
         holder.heart.setOnClickListener(new View.OnClickListener()
@@ -147,7 +155,6 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
                     listWishlist.add(item.getKey());
                 }
                 for (int i =0 ; i < listWishlist.size();i++) {
-                    // so sanh id cua san pham (cua minh la chapter) voi id trong list nay
                     String id = novelId + chapter.getId();
                     if (id.equals(listWishlist.get(i))) {
                         heart.setImageResource(R.drawable.ic_heart_activated);

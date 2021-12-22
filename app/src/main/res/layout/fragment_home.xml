@@ -24,7 +24,6 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -37,11 +36,10 @@
             android:orientation="vertical">
 
 
-
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/icon"/>
+                android:src="@drawable/icon" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -53,7 +51,35 @@
                 android:textColor="#262626"
                 android:textSize="20sp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="5dp"
+                android:layout_marginBottom="20dp"
+                android:baselineAligned="false">
 
+
+                <AutoCompleteTextView
+                    android:id="@+id/home_tv_search"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_radius"
+                    android:drawableEnd="@drawable/ic_baseline_search_24"
+                    android:hint="Search"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    tools:ignore="TextContrastCheck" />
+
+
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_rv_novels"
@@ -63,11 +89,6 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="10dp" />
 
-            <TextView
-                android:id="@+id/tv_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SomeThing" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
