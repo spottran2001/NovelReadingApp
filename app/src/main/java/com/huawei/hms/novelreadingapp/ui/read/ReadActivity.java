@@ -1,6 +1,7 @@
 package com.huawei.hms.novelreadingapp.ui.read;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,15 +23,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.huawei.hms.novelreadingapp.R;
 import com.huawei.hms.novelreadingapp.model.Chapter;
 import com.huawei.hms.novelreadingapp.model.Novel;
+import com.huawei.hms.novelreadingapp.ui.auth.LoginActivity;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ReadActivity extends AppCompatActivity {
     TextView title, content;
     Button previous,previous2, next,next2;
-    ImageButton dropdown1, dropdown2;
+    ImageButton dropdown1, dropdown2, back;
     Spinner spinner,spinner2;
-    ImageButton back;
     ArrayList<Chapter> mChapters;
     private String currentChapter;
     private int size, text;
@@ -43,7 +46,6 @@ public class ReadActivity extends AppCompatActivity {
         novelId = intent.getStringExtra("novelId");
         chapterId = intent.getStringExtra("chapterId");
         size = intent.getIntExtra( "size",0);
-        String abc = novelId + chapterId + size;
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +53,7 @@ public class ReadActivity extends AppCompatActivity {
 
             }
         });
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -175,6 +178,8 @@ public class ReadActivity extends AppCompatActivity {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter);
                 spinner2.setAdapter(adapter);
+
+
             }
 
             @Override
@@ -201,6 +206,8 @@ public class ReadActivity extends AppCompatActivity {
                 content.setText(contents);
                 spinner.setSelection(Integer.parseInt(chapterId.substring(1))-1);
                 spinner2.setSelection(Integer.parseInt(chapterId.substring(1))-1);
+
+    
             }
 
             @Override
@@ -231,6 +238,7 @@ public class ReadActivity extends AppCompatActivity {
             getChapter(novelId, chapterId);
         }
     }
+
 
     private void matching(){
         back= findViewById(R.id.read_ib_back);
