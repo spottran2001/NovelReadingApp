@@ -91,7 +91,6 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
                 context.startActivity(intent);
             }
         } );
-        // lay wishlist
 
         //getUserWishlist(fUser.getUid(), product, holder.heart);
         setIdUser(LoginActivity.getAccount().getOpenId());

@@ -136,8 +136,8 @@ public class HomeFragment extends Fragment  implements NovelListAdapter.OnNovelL
 
 
         //ads-kit
-//        HwAds.init(getActivity());
-//        loadInterstitialAd();
+        HwAds.init(getActivity());
+        loadInterstitialAd();
 
 
 

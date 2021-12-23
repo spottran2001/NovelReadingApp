@@ -77,7 +77,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         loadImage(holder.image,novel.getImage());
 
         totalCount= mWishlist.size();
-        items.setText(totalCount > 1 ? totalCount + " ITEMS": totalCount + " ITEM");
+        items.setText(totalCount > 1 ? totalCount + " Novels": totalCount + " Novel");
 
 
         holder.name.setText(novel.getName());

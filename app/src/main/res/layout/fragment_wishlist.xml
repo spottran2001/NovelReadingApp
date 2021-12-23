@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|center_horizontal"
                 android:textAllCaps="true"
-                android:text="wishlist"
+                android:text="Saved Chapters"
                 android:layout_marginTop="20dp"
                 android:textColor="#333333"
                 android:textSize="24sp" />
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="0 ITEM"
+                android:text="0 Novel"
                 android:textColor="#444444"
                 android:textSize="16sp" />
 

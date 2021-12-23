@@ -33,9 +33,6 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
 
-
-
-
             <ImageButton
                 android:id="@+id/read_ib_back"
                 android:layout_width="wrap_content"
@@ -75,13 +72,14 @@
             android:layout_marginTop="15dp"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/read_btn_previous"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Previous"
                 android:layout_marginHorizontal="10dp"
-                />
+                android:backgroundTint="#000000"
+                android:text="Previous" />
             <RelativeLayout
                 android:id="@+id/cart_spinner_cont"
                 android:layout_width="wrap_content"
@@ -103,28 +101,31 @@
                 <ImageButton
                     android:id="@+id/read_ib_drop"
                     android:layout_width="30dp"
-                    android:layout_height="10dp"
+                    android:layout_height="15dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="120dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="110dp"
+                    android:layout_marginTop="15dp"
                     android:background="?android:selectableItemBackground"
                     android:backgroundTint="#777777"
                     android:src="@drawable/ic_drop_down"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,DuplicateClickableBoundsCheck" />
 
             </RelativeLayout>
+
             <Button
                 android:id="@+id/read_btn_next"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Next"
                 android:layout_marginHorizontal="10dp"
-                />
+                android:backgroundTint="#000000"
+                android:text="Next" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+            >
             <TextView
                 android:id="@+id/read_tv_content"
                 android:layout_width="match_parent"
@@ -137,16 +138,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginVertical="15dp"
             android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
+
             <Button
                 android:id="@+id/read_btn_previous_2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Previous"
                 android:layout_marginHorizontal="10dp"
-                />
+                android:backgroundTint="#000000"
+                android:text="Previous" />
             <RelativeLayout
                 android:id="@+id/cart_spinner_cont_2"
                 android:layout_width="wrap_content"
@@ -168,24 +171,25 @@
                 <ImageButton
                     android:id="@+id/read_ib_drop_2"
                     android:layout_width="30dp"
-                    android:layout_height="10dp"
+                    android:layout_height="15dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="120dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="110dp"
+                    android:layout_marginTop="15dp"
                     android:background="?android:selectableItemBackground"
                     android:backgroundTint="#777777"
                     android:src="@drawable/ic_drop_down"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,DuplicateClickableBoundsCheck" />
 
             </RelativeLayout>
+
             <Button
                 android:id="@+id/read_btn_next_2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Next"
                 android:layout_marginHorizontal="10dp"
-                />
+                android:backgroundTint="#000000"
+                android:text="Next" />
         </LinearLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
