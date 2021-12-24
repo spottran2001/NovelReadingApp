@@ -109,18 +109,24 @@ public class DetailActivity extends AppCompatActivity implements ChapterAdapter.
                     chapter.setNovelId(id);
                     mChapters.add(chapter);
                 }
-                readLatest.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), ReadActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra("novelId",id);
-                        intent.putExtra("chapterId", mChapters.get(mChapters.size()-1).getId());
-                        intent.putExtra("size", mChapters.size());
-                        startActivity(intent);
+                if(mChapters.size() >0 ){
+                    readLatest.setVisibility(View.VISIBLE);
 
-                    }
-                });
+                    readLatest.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getApplicationContext(), ReadActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.putExtra("novelId",id);
+                            intent.putExtra("chapterId", mChapters.get(mChapters.size()-1).getId());
+                            intent.putExtra("size", mChapters.size());
+                            startActivity(intent);
+
+                        }
+                    });
+                }else{
+                    readLatest.setVisibility(View.GONE);
+                }
 
                 adapter = new ChapterAdapter(getApplicationContext(), mChapters, DetailActivity.this, novelId);
                 recyclerView.setAdapter(adapter);
