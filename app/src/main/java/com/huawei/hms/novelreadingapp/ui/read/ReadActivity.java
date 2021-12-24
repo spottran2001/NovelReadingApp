@@ -207,7 +207,7 @@ public class ReadActivity extends AppCompatActivity {
                 spinner.setSelection(Integer.parseInt(chapterId.substring(1))-1);
                 spinner2.setSelection(Integer.parseInt(chapterId.substring(1))-1);
 
-    
+
             }
 
             @Override
